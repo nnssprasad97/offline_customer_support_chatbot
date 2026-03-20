@@ -29,7 +29,7 @@ Activate the virtual environment:
 
 Install the required packages:
 ```bash
-pip install requests datasets
+pip install -r requirements.txt
 ```
 
 ### 4. Run the Application

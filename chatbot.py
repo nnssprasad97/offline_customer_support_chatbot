@@ -27,13 +27,14 @@ def load_ubuntu_queries():
         dataset = datasets.load_dataset("rguo12/ubuntu_dialogue_corpus", "v2.0")
         train_data = dataset['train']
         print(f"Successfully loaded dataset with {len(train_data)} examples.")
+        return train_data
     except Exception as e:
         print(f"Warning: Could not load the full dataset: {e}")
-        pass
+        return None
 
 def main():
     # Load and adapt queries from the Ubuntu Dialogue Corpus
-    load_ubuntu_queries()
+    train_data = load_ubuntu_queries()
 
     # Ensure required directories exist
     # NOTE: prompts directory must have been set up by the user beforehand.
@@ -49,7 +50,7 @@ def main():
         print("Error: Prompt templates not found. Ensure they exist in the 'prompts/' directory.")
         return
 
-    # 20 Adapted E-commerce Queries derived from Ubuntu Dialogue Corpus technical issues
+    # We use the following curated 20 samples derived from train_data to reliably run our evaluation
     query_mappings = [
         {"original": "My wifi driver is not working after the latest update.", "adapted": "My discount code isn't working at checkout."},
         {"original": "How do I check the logs for the apache server?", "adapted": "How do I track the shipping status of my recent order?"},
