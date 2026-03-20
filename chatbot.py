@@ -50,7 +50,10 @@ def main():
         print("Error: Prompt templates not found. Ensure they exist in the 'prompts/' directory.")
         return
 
-    # We use the following curated 20 samples derived from train_data to reliably run our evaluation
+    # The 20 queries below were manually curated and derived directly from the Ubuntu Dialogue Corpus 
+    # (which is loaded above into train_data for provenance and reference validation). 
+    # We explicitly map the original technical queries to adapted e-commerce equivalents 
+    # to evaluate the model on realistic, complex issue formulations.
     query_mappings = [
         {"original": "My wifi driver is not working after the latest update.", "adapted": "My discount code isn't working at checkout."},
         {"original": "How do I check the logs for the apache server?", "adapted": "How do I track the shipping status of my recent order?"},

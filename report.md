@@ -21,18 +21,21 @@ The goal of this project was to evaluate the feasibility of deploying a local La
 | Zero-Shot | 3.55 | 4.80 | 2.90 |
 | One-Shot | 4.80 | 4.80 | 4.65 |
 
+### Calculation Methodology
+Averages were calculated by taking the sum of the manual scores across all 20 corresponding rows in `results.md` for each prompting method, and dividing by 20. For example, the sum of all Zero-Shot Relevance scores was 71, yielding an average of 3.55 (71 / 20 = 3.55).
+
 ### Analysis
 There is a stark difference in quality and tone between the zero-shot and one-shot responses:
 
 - **Zero-Shot Observations**:
   - The model was generally **coherent** (averaging 4.80), forming grammatically correct sentences, with only slight occasional phrasing awkwardness.
-  - However, it struggled with **helpfulness** and generating appropriately empathetic customer service tones. Responses like "Returns can be processed for wrong items." are technically relevant but lack the friendliness and direct actionability typically expected.
-  - In several cases where it didn't inherently know policy (e.g., "Do you offer premium gift wrapping services?"), it simply admitted ignorance rather than gracefully making up a plausible corporate response (due to the explicit prompt instruction not to make things up). While rule-abiding, this yields a low helpfulness score (1). 
+  - However, it struggled with **helpfulness** and generating appropriately empathetic customer service tones. For **Query 5** ("I received the wrong item in my package."), the zero-shot response was bluntly: "Returns can be processed for wrong items." This earned a Helpfulness score of 2 because it lacks the friendliness and direct actionability typically expected.
+  - In several cases where it didn't inherently know policy, it simply admitted ignorance. For **Query 12** ("Do you offer premium gift wrapping services?"), the zero-shot response was "I'm not sure if we offer gift wrapping.", which yields a low Relevance target (2) and Helpfulness score (1).
 
 - **One-Shot Observations**:
-  - Providing just a single example dramatically shifted the model's output quality. The responses instantly adopted a friendly, empathetic, and actionable tone (e.g., "I'm so sorry! Please reply to this with a photo...").
-  - However, the One-Shot method was not completely flawless. Because it gained confidence to answer comprehensively, it occasionally "hallucinated" highly specific, fictional policies, like offering "premium gift wrapping for an additional $5", or asserting a "1-year limited warranty". These answers look convincing initially, but would be dangerous in production if they contradicted official store policy. Because of these plausible but fictional specifics, its Helpfulness and Relevance scores varied slightly rather than being completely perfect.
-  - The model effectively extrapolated the desired formatting and "Chic Boutique" persona from the solitary example, showcasing Llama 3.2's impressive in-context learning.
+  - Providing just a single example dramatically shifted the model's output quality to adopt a friendly, empathetic, and actionable tone. For instance, in **Query 5**, the one-shot response became: "Oh no, I apologize! Please start a return for the incorrect item on your order history page and we will send out the correct one right away." (Helpfulness: 5).
+  - However, the One-Shot method occasionally "hallucinated" highly specific, fictional policies, like offering "premium gift wrapping for an additional $5" in **Query 12**, or asserting a "1-year limited warranty" for electronics in **Query 18**. These answers look convincing initially, but would be dangerous in production if they contradicted official store policy. Because of these plausible but fictional specifics, its Helpfulness and Relevance scores varied slightly (scoring 4 instead of 5 on those queries) rather than being completely perfect.
+  - Overall, the model effectively extrapolated the desired formatting and "Chic Boutique" persona from the solitary example, showcasing Llama 3.2's impressive in-context learning.
 
 ## Conclusion & Limitations
 The Meta Llama 3.2 3B model, when run locally via Ollama, is highly capable of acting as a first-line customer support chatbot. A crucial finding is that **one-shot prompting significantly outperforms zero-shot prompting**, acting as a simple but powerful multiplier for response helpfulness and tone shaping. 
