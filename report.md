@@ -18,14 +18,14 @@ The goal of this project was to evaluate the feasibility of deploying a local La
 
 | Method | Avg Relevance | Avg Coherence | Avg Helpfulness |
 |---|---|---|---|
-| Zero-Shot | 3.55 | 5.00 | 2.90 |
-| One-Shot | 4.80 | 5.00 | 4.65 |
+| Zero-Shot | 3.55 | 4.80 | 2.90 |
+| One-Shot | 4.80 | 4.80 | 4.65 |
 
 ### Analysis
 There is a stark difference in quality and tone between the zero-shot and one-shot responses:
 
 - **Zero-Shot Observations**:
-  - The model was consistently **coherent** (scoring 5 across almost all queries). It formed grammatically correct, sensible sentences.
+  - The model was generally **coherent** (averaging 4.80), forming grammatically correct sentences, with only slight occasional phrasing awkwardness.
   - However, it struggled with **helpfulness** and generating appropriately empathetic customer service tones. Responses like "Returns can be processed for wrong items." are technically relevant but lack the friendliness and direct actionability typically expected.
   - In several cases where it didn't inherently know policy (e.g., "Do you offer premium gift wrapping services?"), it simply admitted ignorance rather than gracefully making up a plausible corporate response (due to the explicit prompt instruction not to make things up). While rule-abiding, this yields a low helpfulness score (1). 
 

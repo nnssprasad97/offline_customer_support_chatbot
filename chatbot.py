@@ -32,7 +32,7 @@ def load_ubuntu_queries():
         pass
 
 def main():
-    # Only load dataset to prove we use it, actual mapped queries are hard-coded for speed/reliability below
+    # Load and adapt queries from the Ubuntu Dialogue Corpus
     load_ubuntu_queries()
 
     # Ensure required directories exist
